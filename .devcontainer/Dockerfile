@@ -5,7 +5,7 @@ FROM mcr.microsoft.com/devcontainers/base:1-bookworm@sha256:ce2e9e611939e611b737
 USER root
 
 # Copy the pinned Docker 29.0.2 client and Compose 2.40.3 plugin. The
-# docker-outside-of-docker feature only supplies access to the host socket.
+# docker-outside-of-docker feature supplies access to the host socket.
 COPY --from=docker_cli /usr/local/bin/docker /usr/local/bin/docker
 COPY --from=docker_cli /usr/local/libexec/docker/cli-plugins/docker-compose /usr/local/libexec/docker/cli-plugins/docker-compose
 
@@ -14,5 +14,6 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-USER vscode
-
+# Dev Container Features install as the image's current user and need root.
+# devcontainer.json selects vscode for interactive sessions.
+USER root

@@ -3,9 +3,13 @@
   "build": {
     "dockerfile": "Dockerfile"
   },
+  "remoteUser": "vscode",
   "features": {
     "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-      "moby": false
+      "moby": false,
+      "dockerDashComposeVersion": "none",
+      "installDockerBuildx": false,
+      "installDockerComposeSwitch": false
     }
   },
   "forwardPorts": [8080, 9120],
@@ -19,4 +23,3 @@
   },
   "postStartCommand": "./scripts/start-komodo"
 }
-
